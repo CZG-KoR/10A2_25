@@ -7,14 +7,14 @@ package main;
 import assets.actors.Enemy;
 import assets.actors.Tower;
 import gamelogic.Ticks;
-import javax.swing.Timer;
-import java.util.TimerTask;
 import javax.swing.JFrame;
-import gamelogic.Ticks;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.*;
+import java.awt.*;
 
 public class Main {
 
@@ -27,17 +27,11 @@ public class Main {
     public static lilC c = new lilC();
 
     public static void main(String[] args) {
-//Vorbereitung Map Erstlleung
-        // TODO code application logic here     
-        //Ticks m = new Ticks();
-        JFrame f = new JFrame();
-        f.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        f.setLayout(null);
-        f.setSize(1920, 1080);
-        f.add(c);
-        f.setVisible(true);
-        f.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
+        // Vorbereitung Map Erstlleung
+        // TODO code application logic here
+         Ticks m = new Ticks(c);
+         gamelogic.Mouse mouse = new gamelogic.Mouse();
+         c.addMouseListener(mouse);
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         f.setLayout(null);
@@ -48,16 +42,16 @@ public class Main {
         lP.setSize(new Dimension(1920, 1080));
         lP.setLayout(null);
 
-        lilC c = new lilC();
+    
 
         // 5 -> je kleiner die Zahl, desto weiter im Hintergrund
         lP.add(c, (Object) (5));
 
-        //Label
+        // Label
         JPanel hilfP1 = new JPanel();
         hilfP1.setSize(200, 100);
         hilfP1.setLayout(null);
-        hilfP1.setBounds(1460, 350,300, 295);
+        hilfP1.setBounds(1460, 350, 300, 295);
         hilfP1.setOpaque(false);
 
         JLabel text1 = new JLabel();
@@ -68,11 +62,10 @@ public class Main {
         text1.setText("Range");
         text1.setVisible(true);
 
-        
         JPanel hilfP2 = new JPanel();
         hilfP2.setSize(200, 100);
         hilfP2.setLayout(null);
-        hilfP2.setBounds(1630, 350,300, 295);
+        hilfP2.setBounds(1630, 350, 300, 295);
         hilfP2.setOpaque(false);
 
         JLabel text2 = new JLabel();
@@ -82,11 +75,11 @@ public class Main {
         text2.setForeground(Color.black);
         text2.setText("Splash");
         text2.setVisible(true);
-        
+
         JPanel hilfP3 = new JPanel();
         hilfP3.setSize(200, 100);
         hilfP3.setLayout(null);
-        hilfP3.setBounds(1802, 350,300, 295);
+        hilfP3.setBounds(1802, 350, 300, 295);
         hilfP3.setOpaque(false);
 
         JLabel text3 = new JLabel();
@@ -96,11 +89,11 @@ public class Main {
         text3.setForeground(Color.black);
         text3.setText("Melee");
         text3.setVisible(true);
-        
+
         JPanel hilfP4 = new JPanel();
         hilfP4.setSize(200, 100);
         hilfP4.setLayout(null);
-        hilfP4.setBounds(1640, 425,300, 295);
+        hilfP4.setBounds(1640, 425, 300, 295);
         hilfP4.setOpaque(false);
 
         JLabel text4 = new JLabel();
@@ -110,11 +103,11 @@ public class Main {
         text4.setForeground(Color.black);
         text4.setText("LVL1");
         text4.setVisible(true);
-        
+
         JPanel hilfP5 = new JPanel();
         hilfP5.setSize(200, 100);
         hilfP5.setLayout(null);
-        hilfP5.setBounds(1450, 450,300, 295);
+        hilfP5.setBounds(1450, 450, 300, 295);
         hilfP5.setOpaque(false);
 
         JLabel text5 = new JLabel();
@@ -124,11 +117,11 @@ public class Main {
         text5.setForeground(Color.black);
         text5.setText("Bambusspeer");
         text5.setVisible(true);
-        
+
         JPanel hilfP6 = new JPanel();
         hilfP6.setSize(200, 100);
         hilfP6.setLayout(null);
-        hilfP6.setBounds(1450, 550,300, 295);
+        hilfP6.setBounds(1450, 550, 300, 295);
         hilfP6.setOpaque(false);
 
         JLabel text6 = new JLabel();
@@ -138,11 +131,11 @@ public class Main {
         text6.setForeground(Color.black);
         text6.setText("Doppelbambuspeer");
         text6.setVisible(true);
-        
+
         JPanel hilfP7 = new JPanel();
         hilfP7.setSize(200, 100);
         hilfP7.setLayout(null);
-        hilfP7.setBounds(1450, 650,300, 295);
+        hilfP7.setBounds(1450, 650, 300, 295);
         hilfP7.setOpaque(false);
 
         JLabel text7 = new JLabel();
@@ -152,11 +145,11 @@ public class Main {
         text7.setForeground(Color.black);
         text7.setText("Blasrohr");
         text7.setVisible(true);
-        
+
         JPanel hilfP8 = new JPanel();
         hilfP8.setSize(200, 100);
         hilfP8.setLayout(null);
-        hilfP8.setBounds(1450, 668,300, 295);
+        hilfP8.setBounds(1450, 668, 300, 295);
         hilfP8.setOpaque(false);
 
         JLabel text8 = new JLabel();
@@ -166,11 +159,11 @@ public class Main {
         text8.setForeground(Color.black);
         text8.setText("(schnelle SChüssse)");
         text8.setVisible(true);
-        
+
         JPanel hilfP9 = new JPanel();
         hilfP9.setSize(200, 100);
         hilfP9.setLayout(null);
-        hilfP9.setBounds(1620, 450,300, 295);
+        hilfP9.setBounds(1620, 450, 300, 295);
         hilfP9.setOpaque(false);
 
         JLabel text9 = new JLabel();
@@ -180,11 +173,11 @@ public class Main {
         text9.setForeground(Color.black);
         text9.setText("Smash");
         text9.setVisible(true);
-       
+
         JPanel hilfP10 = new JPanel();
         hilfP10.setSize(200, 100);
         hilfP10.setLayout(null);
-        hilfP10.setBounds(1620, 550,300, 295);
+        hilfP10.setBounds(1620, 550, 300, 295);
         hilfP10.setOpaque(false);
 
         JLabel text10 = new JLabel();
@@ -194,11 +187,11 @@ public class Main {
         text10.setForeground(Color.black);
         text10.setText("Dynamit");
         text10.setVisible(true);
-        
+
         JPanel hilfP11 = new JPanel();
         hilfP11.setSize(200, 100);
         hilfP11.setLayout(null);
-        hilfP11.setBounds(1620, 650,300, 295);
+        hilfP11.setBounds(1620, 650, 300, 295);
         hilfP11.setOpaque(false);
 
         JLabel text11 = new JLabel();
@@ -208,12 +201,11 @@ public class Main {
         text11.setForeground(Color.black);
         text11.setText("Bombe");
         text11.setVisible(true);
-        
-        
+
         JPanel hilfP12 = new JPanel();
         hilfP12.setSize(200, 100);
         hilfP12.setLayout(null);
-        hilfP12.setBounds(1780, 450,300, 295);
+        hilfP12.setBounds(1780, 450, 300, 295);
         hilfP12.setOpaque(false);
 
         JLabel text12 = new JLabel();
@@ -223,11 +215,11 @@ public class Main {
         text12.setForeground(Color.black);
         text12.setText("Punch");
         text12.setVisible(true);
-        
+
         JPanel hilfP13 = new JPanel();
         hilfP13.setSize(200, 100);
         hilfP13.setLayout(null);
-        hilfP13.setBounds(1780, 550,300, 295);
+        hilfP13.setBounds(1780, 550, 300, 295);
         hilfP13.setOpaque(false);
 
         JLabel text13 = new JLabel();
@@ -237,11 +229,11 @@ public class Main {
         text13.setForeground(Color.black);
         text13.setText("Schwert");
         text13.setVisible(true);
-        
+
         JPanel hilfP14 = new JPanel();
         hilfP14.setSize(200, 100);
         hilfP14.setLayout(null);
-        hilfP14.setBounds(1770, 650,300, 295);
+        hilfP14.setBounds(1770, 650, 300, 295);
         hilfP14.setOpaque(false);
 
         JLabel text14 = new JLabel();
@@ -251,11 +243,11 @@ public class Main {
         text14.setForeground(Color.black);
         text14.setText("Schwert&Axt");
         text14.setVisible(true);
-        
+
         JPanel hilfP15 = new JPanel();
         hilfP15.setSize(200, 100);
         hilfP15.setLayout(null);
-        hilfP15.setBounds(1640, 520,300, 295);
+        hilfP15.setBounds(1640, 520, 300, 295);
         hilfP15.setOpaque(false);
 
         JLabel text15 = new JLabel();
@@ -265,11 +257,11 @@ public class Main {
         text15.setForeground(Color.black);
         text15.setText("LVL2");
         text15.setVisible(true);
-        
+
         JPanel hilfP16 = new JPanel();
         hilfP16.setSize(200, 100);
         hilfP16.setLayout(null);
-        hilfP16.setBounds(1640, 620,300, 295);
+        hilfP16.setBounds(1640, 620, 300, 295);
         hilfP16.setOpaque(false);
 
         JLabel text16 = new JLabel();
@@ -279,11 +271,11 @@ public class Main {
         text16.setForeground(Color.black);
         text16.setText("LVL3");
         text16.setVisible(true);
-        
+
         JPanel hilfP17 = new JPanel();
         hilfP17.setSize(200, 100);
         hilfP17.setLayout(null);
-        hilfP17.setBounds(1480, 805,300, 295);
+        hilfP17.setBounds(1480, 805, 300, 295);
         hilfP17.setOpaque(false);
 
         JLabel text17 = new JLabel();
@@ -293,11 +285,11 @@ public class Main {
         text17.setForeground(Color.cyan);
         text17.setText("FREEZE");
         text17.setVisible(true);
-        
+
         JPanel hilfP18 = new JPanel();
         hilfP18.setSize(200, 100);
         hilfP18.setLayout(null);
-        hilfP18.setBounds(1730, 805,300, 295);
+        hilfP18.setBounds(1730, 805, 300, 295);
         hilfP18.setOpaque(false);
 
         JLabel text18 = new JLabel();
@@ -307,7 +299,7 @@ public class Main {
         text18.setForeground(Color.green);
         text18.setText("UPGRADE");
         text18.setVisible(true);
-        
+
         // Text aufs hilfspanel
         hilfP1.add(text1);
         hilfP1.setVisible(true);
@@ -319,33 +311,33 @@ public class Main {
         hilfP4.setVisible(true);
         hilfP5.add(text5);
         hilfP5.setVisible(true);
-        hilfP6.add(text6);          
+        hilfP6.add(text6);
         hilfP6.setVisible(true);
-        hilfP7.add(text7);          
+        hilfP7.add(text7);
         hilfP7.setVisible(true);
-        hilfP8.add(text8);          
+        hilfP8.add(text8);
         hilfP8.setVisible(true);
-        hilfP9.add(text9);          
+        hilfP9.add(text9);
         hilfP9.setVisible(true);
-        hilfP10.add(text10);          
+        hilfP10.add(text10);
         hilfP10.setVisible(true);
-        hilfP11.add(text11);          
+        hilfP11.add(text11);
         hilfP11.setVisible(true);
-        hilfP12.add(text12);          
+        hilfP12.add(text12);
         hilfP12.setVisible(true);
-        hilfP13.add(text13);          
+        hilfP13.add(text13);
         hilfP13.setVisible(true);
-        hilfP14.add(text14);          
+        hilfP14.add(text14);
         hilfP14.setVisible(true);
-        hilfP15.add(text15);          
+        hilfP15.add(text15);
         hilfP15.setVisible(true);
-        hilfP16.add(text16);          
+        hilfP16.add(text16);
         hilfP16.setVisible(true);
-        hilfP17.add(text17);          
+        hilfP17.add(text17);
         hilfP17.setVisible(true);
-        hilfP18.add(text18);          
+        hilfP18.add(text18);
         hilfP18.setVisible(true);
-        
+
         // hilfspanel auf die ebene 20
         lP.add(hilfP1, (Object) (20));
         lP.add(hilfP2, (Object) (20));
@@ -365,13 +357,12 @@ public class Main {
         lP.add(hilfP16, (Object) (20));
         lP.add(hilfP17, (Object) (20));
         lP.add(hilfP18, (Object) (20));
-        
+
         lP.setVisible(true);
 
         f.add(lP);
         f.setVisible(true);
 
-        
         int a = 40;
 
         for (int i = 0; i < 35; i++) {
@@ -380,10 +371,8 @@ public class Main {
                 lilM[i][j] = new Tiles(i * a, j * a, 1, true);
             }
 
-            
-            
         }
-//Weg 
+        // Weg
         lilM[0][13] = new Tiles(0 * a, 13 * a - 30, 3, false);
         lilM[1][13] = new Tiles(1 * a, 13 * a - 30, 4, false);
         lilM[2][13] = new Tiles(2 * a, 13 * a - 30, 5, false);
@@ -472,7 +461,7 @@ public class Main {
         lilM[33][13] = new Tiles(33 * a, 13 * a - 30, 88, false);
         lilM[34][13] = new Tiles(34 * a, 13 * a - 30, 89, false);
 
-        //Deko
+        // Deko
         lilM[3][6] = new Tiles(3 * a, 6 * a, 2, false);
         lilM[2][2] = new Tiles(2 * a, 2 * a, 2, false);
         lilM[2][3] = new Tiles(2 * a, 3 * a, 2, false);
@@ -691,9 +680,9 @@ public class Main {
         lilM[24][23] = new Tiles(24 * a, 23 * a, 2, false);
         lilM[25][23] = new Tiles(25 * a, 23 * a, 2, false);
 
-//Runde 1 starten    
+        // Runde 1 starten
         waves(wave);
-        
+
         Timer repaintT = new Timer(9, (ActionEvent e) -> {
             c.repaint();
         });
@@ -702,118 +691,148 @@ public class Main {
 
     public static void waves(int wave) {
         System.out.println("wave:" + wave);
-        //Je nach wave unterschiedliche Gegner für die jeweilige Runde spawnen
+        // Je nach wave unterschiedliche Gegner für die jeweilige Runde spawnen
         switch (wave) {
             case 1:
                 for (int i = 0; i < 5; i++) {
-                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
-                }
-   for (int i = 0; i < 2; i++) {
-                    Enemy.Tank.add(new Enemy(0.8, 0, 80, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
-                }
-            case 2:
-                for (int i = 0; i < 4; i++) {
-                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
+                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
                 }
                 for (int i = 0; i < 2; i++) {
-                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
+                    Enemy.Tank.add(new Enemy(0.8, 0, 80, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
                 }
-   for (int i = 0; i < 2; i++) {
-                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
+                break;
+            case 2:
+                for (int i = 0; i < 4; i++) {
+                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
+                }
+                for (int i = 0; i < 2; i++) {
+                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
+                }
+                for (int i = 0; i < 2; i++) {
+                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
                 }
                 break;
             case 3:
-               for (int i = 0; i < 7; i++) {
-                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
+                for (int i = 0; i < 7; i++) {
+                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
                 }
                 for (int i = 0; i < 2; i++) {
-                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
+                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
                 }
-   for (int i = 0; i < 5; i++) {
-                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
+                for (int i = 0; i < 5; i++) {
+                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
                 }
                 break;
             case 4:
-               for (int i = 0; i < 10; i++) {
-                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
+                for (int i = 0; i < 10; i++) {
+                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
                 }
                 for (int i = 0; i < 3; i++) {
-                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
-                }
-   for (int i = 0; i < 8; i++) {
-                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
-                }               
-                break;
-            case 5:
-               for (int i = 0; i < 0; i++) {
-                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
-                }
-                for (int i = 0; i < 1; i++) {
-                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
-                }
-   for (int i = 0; i < 20; i++) {
-                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
-                }                
-                break;
-            case 6:
-               for (int i = 0; i < 12; i++) {
-                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
-                }
-                for (int i = 0; i < 5; i++) {
-                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
-                }
-   for (int i = 0; i < 4; i++) {
-                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
-                }                
-                break;
-            case 7:
-               for (int i = 0; i < 10; i++) {
-                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
-                }
-                for (int i = 0; i < 6; i++) {
-                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
-                }
-   for (int i = 0; i < 8; i++) {
-                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
-                }                
-                break;
-            case 8:
-               for (int i = 0; i < 14; i++) {
-                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
-                }
-                for (int i = 0; i < 4; i++) {
-                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
-                }
-   for (int i = 0; i < 12; i++) {
-                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
-                }                
-                break;
-            case 9:
-               for (int i = 0; i < 15; i++) {
-                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
-                }
-                for (int i = 0; i < 5; i++) {
-                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
-                }
-   for (int i = 0; i < 15; i++) {
-                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
-                }                
-                break;
-            case 10:
-               for (int i = 0; i < 20; i++) {
-                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
+                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
                 }
                 for (int i = 0; i < 8; i++) {
-                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
+                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
                 }
-   for (int i = 0; i < 16; i++) {
-                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490, new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
-                }                
+                break;
+            case 5:
+                for (int i = 0; i < 15; i++) {
+                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
+                }
+                for (int i = 0; i < 1; i++) {
+                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
+                }
+                for (int i = 0; i < 20; i++) {
+                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
+                }
+                break;
+            case 6:
+                for (int i = 0; i < 12; i++) {
+                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
+                }
+                for (int i = 0; i < 5; i++) {
+                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
+                }
+                for (int i = 0; i < 4; i++) {
+                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
+                }
+                break;
+            case 7:
+                for (int i = 0; i < 10; i++) {
+                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
+                }
+                for (int i = 0; i < 6; i++) {
+                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
+                }
+                for (int i = 0; i < 8; i++) {
+                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
+                }
+                break;
+            case 8:
+                for (int i = 0; i < 14; i++) {
+                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
+                }
+                for (int i = 0; i < 4; i++) {
+                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
+                }
+                for (int i = 0; i < 12; i++) {
+                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
+                }
+                break;
+            case 9:
+                for (int i = 0; i < 15; i++) {
+                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
+                }
+                for (int i = 0; i < 5; i++) {
+                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
+                }
+                for (int i = 0; i < 15; i++) {
+                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
+                }
+                break;
+            case 10:
+                for (int i = 0; i < 20; i++) {
+                    Enemy.Standard.add(new Enemy(0.2, 0, 50, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Anfangsgegner.png")), "Standard"));
+                }
+                for (int i = 0; i < 8; i++) {
+                    Enemy.Tank.add(new Enemy(0.8, 0, 200, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Endgegner.png")), "Tank"));
+                }
+                for (int i = 0; i < 16; i++) {
+                    Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490,
+                            new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
+                }
                 break;
         }
     }
 
-//Nächstes Tile bestimmen    
+    // Nächstes Tile bestimmen
     public static Tiles getNextTile(int old) {
         for (int i = 0; i < lilM.length; i++) {
             for (int j = 0; j < lilM[i].length; j++) {

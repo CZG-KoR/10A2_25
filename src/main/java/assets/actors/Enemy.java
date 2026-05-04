@@ -11,7 +11,7 @@ import java.util.Random;
 public class Enemy extends GameAsset {
 
 
-static Enemy Enemy;
+static Enemy Enemy = new Enemy(0, 0, null, "Dummy");
 public static ArrayList<Enemy> Standard = new ArrayList<>();
 public static ArrayList<Enemy> Tank = new ArrayList<>();
 public static ArrayList<Enemy> Fast = new ArrayList<>();
@@ -114,18 +114,21 @@ this.freeze = (int)Math.round(help);
     }    
     public int die(){
     //Jeden Gegner in der jeweiligen Liste suchen und löschen, der keine Leben mehr hat
-        for (int i = 0; i < Standard.size(); i++) {
+        for (int i = Standard.size() - 1; i >= 0; i--) {
             if (Standard.get(i).healthpoints <= 0) {
+            gamelogic.Shop.money += Standard.get(i).bounty;
             Standard.remove(i);
             }    
         }
-        for (int i = 0; i < Tank.size(); i++) {
+        for (int i = Tank.size() - 1; i >= 0; i--) {
             if (Tank.get(i).healthpoints <= 0) {
+            gamelogic.Shop.money += Tank.get(i).bounty;
             Tank.remove(i);
             }    
         }
-        for (int i = 0; i < Fast.size(); i++) {
+        for (int i = Fast.size() - 1; i >= 0; i--) {
             if (Fast.get(i).healthpoints <= 0) {
+            gamelogic.Shop.money += Fast.get(i).bounty;
             Fast.remove(i);
             }    
         }
@@ -138,6 +141,9 @@ this.freeze = (int)Math.round(help);
     }
     public int getBounty() {
         return bounty;
+    }
+    public int getTile() {
+        return tile;
     }
     //Gegner machen Schaden am Ziel
     public void doDamage(double damage){  

@@ -153,19 +153,19 @@ public class lilC extends JPanel {
         AG = D.getImage();
         D = new ImageIcon(getClass().getResource("/Bilder/Bomben_Gegner.png"));
         BG = D.getImage();
-        D = new ImageIcon(getClass().getResource("/Bilder/Koala1.png"));
+        D = new ImageIcon(getClass().getResource("/Bilder/Koala1LVL1.png"));
         Koala1 = D.getImage();
         D = new ImageIcon(getClass().getResource("/Bilder/Koala1LVL2.png"));
         Koala1LVL2 = D.getImage();
         D = new ImageIcon(getClass().getResource("/Bilder/Koala1LVL3.png"));
         Koala1LVL3 = D.getImage();
-        D = new ImageIcon(getClass().getResource("/Bilder/Koala2.png"));
+        D = new ImageIcon(getClass().getResource("/Bilder/Koala2LVL1.png"));
         Koala2 = D.getImage();
         D = new ImageIcon(getClass().getResource("/Bilder/Koala2LVL2.png"));
         Koala2LVL2 = D.getImage();
         D = new ImageIcon(getClass().getResource("/Bilder/Koala2LVL3.png"));
         Koala2LVL3 = D.getImage();
-         D = new ImageIcon(getClass().getResource("/Bilder/Koala3.png"));
+         D = new ImageIcon(getClass().getResource("/Bilder/Koala3LVL1.png"));
         Koala3 = D.getImage();
          D = new ImageIcon(getClass().getResource("/Bilder/Koala3LVL2.png"));
         Koala3LVL2 = D.getImage();
@@ -606,6 +606,14 @@ public class lilC extends JPanel {
             counH++;
             g.drawImage(e.getImg().getImage(), e.getX()-counH*5-80, e.getY()-80, null);
         }        
+        
+        // Alle platzierten Tower zeichnen
+        for (assets.actors.AbstractTower t : assets.actors.AbstractTower.allTowers) {
+            if (t.getImg() != null) {
+                // Skalierung auf 40x40 (Größe eines Tiles)
+                g.drawImage(t.getImg().getImage(), t.getX(), t.getY(), 40, 40, this);
+            }
+        }
         
         g.drawImage(Koala1, 1360, 235,260, 300, this);
         g.drawImage(Koala3, 1700, 235, 260, 300, this);

@@ -1,166 +1,110 @@
-
 package assets.actors;
-import assets.GameAsset;
-import gamelogic.Ticks;
-import static java.lang.Math.sqrt;
+
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import main.Tiles;
 
-public class Tower3 extends GameAsset{
-    Enemy enemy = Enemy.Enemy;
-    static int[][] u = {{500,3,20,2,3},{600,3,30,4,4},{1000,4,40,5,7}};
-    int upgradeCost, upgradeCostFlowers, damage, fireRate, range, level;
-    static int money = 5000;
-    static int flowers = 20;
-    static int i = 0;
-    static int dist = 5;
+public class Tower3 extends AbstractTower {
     public static ArrayList<Tower3> Towers3 = new ArrayList<>();
-    
+    protected static int[][] u = { { 500, 3, 10, 2, 3 }, { 600, 3, 20, 4, 4 }, { 1000, 4, 40, 5, 7 } };
+
+    public Enemy getTargetEnemy() {
+        ArrayList<Enemy> enemies = farestEnemys(this);
+        if (!enemies.isEmpty()) {
+            return enemies.get(0);
+        }
+        return null;
+    }
+
     public Tower3(int x, int y, ImageIcon img, String name) {
         super(x, y, img, name);
-        this.upgradeCost = 500;
-        this.upgradeCostFlowers = 3;
-        this.damage = 20;
-        this.fireRate = 2;
-        this.range = 3;
-        this.level = 0;
-        
+        this.u = Tower3.u;
     }
 
-    public Tower3(int upgradeCost, int upgradeCostFlowers, int damage, int fireRate, int range, int level, int x, int y, ImageIcon img, String name) {
-        super(x, y, img, name);
-        this.upgradeCost = upgradeCost;
-        this.upgradeCostFlowers = upgradeCostFlowers;
-        this.damage = damage;
-        this.fireRate = fireRate;
-        this.range = range;
-        this.level = level;
+    public Tower3(int upgradeCost, int upgradeCostFlowers, int damage, int fireRate, int range, int level, int modef,
+            int x, int y, ImageIcon img, String name) {
+        super(upgradeCost, upgradeCostFlowers, damage, fireRate, range, level, modef, x, y, img, name);
+        this.u = Tower3.u;
     }
 
-    public boolean Enemyinrange(Tower3 tower){
-        boolean g = false;
-        for (Enemy e : Enemy.Standard) {
-                if(Math.sqrt((e.getX()-tower.getX()) * (e.getX()-tower.getX()) + (e.getY()-tower.getY()) * (e.getY()-tower.getY())) <= tower.range){
-                    g = true;
-                }
-            }
-        for (Enemy e : Enemy.Fast) {
-                if(Math.sqrt((e.getX()-tower.getX()) * (e.getX()-tower.getX()) + (e.getY()-tower.getY()) * (e.getY()-tower.getY())) <= tower.range){
-                    g = true;
-                }
-            }
-        for (Enemy e : Enemy.Tank) {
-                if(Math.sqrt((e.getX()-tower.getX()) * (e.getX()-tower.getX()) + (e.getY()-tower.getY()) * (e.getY()-tower.getY())) <= tower.range){
-                    g = true;
-                }
-            }
-        return g ;
-    }
-    
-    // prüfen ob ein bestimmtes tile innerhalb der towerrange liegt
-    public boolean tileinrange(Tiles tile, Tower3 tower){
-        boolean g = false;
-        if(Math.sqrt((tile.getX()-tower.getX()) * (tile.getX()-tower.getX()) + (tile.getY()-tower.getY()) * (tile.getX()-tower.getX())) <= tower.range){
-            g = true;
-        }
-        return g;
-    }
-    // prüfen welcher enemy innerhalb der towerrange am weitesten fortgeschritten ist
-    public ArrayList farestEnemys(Tower3 tower){
+    // prüfen welcher enemy innerhalb der towerrange am weitesten fortgeschritten
+    // ist
+    public ArrayList<Enemy> farestEnemys(Tower3 tower) {
+        Tiles a = null;
         ArrayList<Enemy> b = new ArrayList<>();
-      //  for (int j = 0; j < Map.Weg.size(); j++) {
-           // Tiles a = Map.map.get(Map.map.size()-i);
-                  Tiles a = null;
-            if (abs(a.getX())<= abs(tower.getX()+tower.range)&abs(a.getX())<= abs(tower.getX()+tower.range)) {
-                for (Enemy e : Enemy.Standard) {
-                    if(e.getX() == a.getX() & e.getY() == a.getY()){
-                        b.add(e);
-                        break;
-                    }
-                }
-                for (Enemy e : Enemy.Fast) {
-                    if(e.getX() == a.getX() & e.getY() == a.getY()){
-                        b.add(e);
-                        break;
-                    }
-                }
-                for (Enemy e : Enemy.Tank) {
-                    if(e.getX() == a.getX() & e.getY() == a.getY()){
-                        b.add(e);
-                        break;
+        // tiles vom größten zum kleinsten index durchgehen
+        for (int j = 0; j < 87; j++) {
+            for (int k = 0; k < 35; k++) {
+                for (int l = 0; l < 25; l++) {
+                    if (main.Main.lilM[k][l].getID() == 89 - j) {
+                        a = main.Main.lilM[k][l];
+                        if (tileinrange(a, tower)) {
+                            int xt = a.getX();
+                            int yt = a.getY();
+                            // für ermitteltes tile alle dort befindlichen gegner suchen
+                            for (Enemy e : Enemy.Standard) {
+                                if (e.getX() == xt && e.getY() == yt) {
+                                    b.add(e);
+                                }
+                            }
+                            for (Enemy e : Enemy.Fast) {
+                                if (e.getX() == xt && e.getY() == yt) {
+                                    b.add(e);
+                                }
+                            }
+                            for (Enemy e : Enemy.Tank) {
+                                if (e.getX() == xt && e.getY() == yt) {
+                                    b.add(e);
+                                }
+                            }
+                            if (!b.isEmpty()) {
+                                return b;
+                            }
+                        }
                     }
                 }
             }
-            
-      //  }
+        }
         return b;
     }
-    
-    
-    public void shoot (Tower3 tower) {
-        ArrayList<Enemy> b =farestEnemys(tower);
-        for (Enemy e : b) {
-            e.healthpoints = e.healthpoints - tower.damage;
-        }
-    }
-    
-    public void upgrade (Tower3 tower) {
-        if (tower.level<=3 & money>tower.upgradeCost & flowers>tower.upgradeCostFlowers) {
-            int x = tower.level-1;
-            money = money-tower.upgradeCost;
-            flowers = flowers-tower.upgradeCostFlowers;
-            tower.upgradeCost = u[x][0];
-            tower.upgradeCostFlowers = u[x][1];
-            tower.damage = u[x][2];
-            tower.fireRate = u[x][3];
-            tower.range = u[x][4];
-            tower.level = tower.level+1;
-        }
-    }
 
-    static public void place(int x, int y){
-        Tower3 k = new Tower3(x, y, null, "3T"+i+"");
-        i = i+1;
-        Towers3.add(k);
-        money = money-u[0][0];
-        flowers = flowers-u[0][1];
-    }
-
-    public void upgradefreeze (Tower3 tower){
-        if (mango >= 1) {
-            boolean g = false;
-            for(Tower3 towers3 : Towers3){
-                if (towers3.modef == 1 & Math.sqrt((towers3.getX()-tower.getX()) * (towers3.getX()-tower.getX()) + (towers3.getY()-tower.getY()) * (towers3.getX()-tower.getX())) <= dist) {
-                    g = true;
+    @Override
+    // schießen der Tower
+    public void shoot(AbstractTower tower) {
+        if (Enemyinrange(tower)) {
+            ArrayList<Enemy> b = farestEnemys((Tower3) tower);
+            for (Enemy e : b) {
+                // unterscheidung bezüglich der freeze-Eigenschaft
+                if (tower.modef == 0) {
+                    e.takeDamage(tower.damage);
+                }
+                if (tower.modef == 1 && e.getFreeze() == 0) {
+                    e.takeDamageandFreeze(tower.damage / 5);
+                }
+                if (tower.modef == 1 && e.getFreeze() != 0) {
+                    e.takeDamage(tower.damage / 2);
                 }
             }
-            if (g == false) {
-                tower.modef = 1;
-                mango = mango-1;
-            }
         }
     }
-    
-    public int getUpgradeCost() {
-        return upgradeCost;
+
+    @Override
+    // Tower Typ zurückgeben
+    public int getTowerType() {
+        return 3;
     }
 
-    public int getUpgradeCostFlowers() {
-        return upgradeCostFlowers;
+    // tower auf dem Spielfeld platzieren und initialisieren
+    static public void place(int x, int y) {
+        if (gamelogic.Shop.money >= u[0][0] && gamelogic.Shop.flowers >= u[0][1]) {
+            gamelogic.Shop.money -= u[0][0];
+            gamelogic.Shop.flowers -= u[0][1];
+            Tower3 k = new Tower3(x, y, null, "3T" + i + "");
+            k.updateImage();
+            i = i + 1;
+            Towers3.add(k);
+            main.Main.c.repaint();
+        }
     }
 
-    public int getDamage() {
-        return damage;
-    }
-
-    public int getFireRate() {
-        return fireRate;
-    }
-
-    public int getRange() {
-        return range;
-    }
-   
-    
 }

@@ -3,11 +3,10 @@ package assets;
 
 import javax.swing.ImageIcon;
 
-
 public abstract class GameAsset {
-    int x, y;
-    ImageIcon img;
-    String name;
+    protected int x, y;
+    protected ImageIcon img;
+    protected String name;
 
     public GameAsset(int x, int y, ImageIcon img, String name) {
         this.x = x;
@@ -27,9 +26,10 @@ public abstract class GameAsset {
     public void setY(int y) {
         this.y = y;
     }
+
     public void setX(int x) {
         this.x = x;
-    }    
+    }
 
     public ImageIcon getImg() {
         return img;
@@ -46,5 +46,5 @@ public abstract class GameAsset {
     public void setName(String name) {
         this.name = name;
     }
-    
+
 }

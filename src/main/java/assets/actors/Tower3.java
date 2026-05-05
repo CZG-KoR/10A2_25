@@ -1,7 +1,5 @@
 package assets.actors;
-import assets.GameAsset;
-import gamelogic.Ticks;
-import static java.lang.Math.sqrt;
+
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import main.Tiles;
@@ -23,12 +21,14 @@ public class Tower3 extends AbstractTower {
         this.u = Tower3.u;
     }
 
-    public Tower3(int upgradeCost, int upgradeCostFlowers, int damage, int fireRate, int range, int level, int modef, int x, int y, ImageIcon img, String name) {
+    public Tower3(int upgradeCost, int upgradeCostFlowers, int damage, int fireRate, int range, int level, int modef,
+            int x, int y, ImageIcon img, String name) {
         super(upgradeCost, upgradeCostFlowers, damage, fireRate, range, level, modef, x, y, img, name);
         this.u = Tower3.u;
     }
 
-    // prüfen welcher enemy innerhalb der towerrange am weitesten fortgeschritten ist
+    // prüfen welcher enemy innerhalb der towerrange am weitesten fortgeschritten
+    // ist
     public ArrayList<Enemy> farestEnemys(Tower3 tower) {
         Tiles a = null;
         ArrayList<Enemy> b = new ArrayList<>();
@@ -43,17 +43,17 @@ public class Tower3 extends AbstractTower {
                             int yt = a.getY();
                             // für ermitteltes tile alle dort befindlichen gegner suchen
                             for (Enemy e : Enemy.Standard) {
-                                if (e.getX() == xt & e.getY() == yt) {
+                                if (e.getX() == xt && e.getY() == yt) {
                                     b.add(e);
                                 }
                             }
                             for (Enemy e : Enemy.Fast) {
-                                if (e.getX() == xt & e.getY() == yt) {
+                                if (e.getX() == xt && e.getY() == yt) {
                                     b.add(e);
                                 }
                             }
                             for (Enemy e : Enemy.Tank) {
-                                if (e.getX() == xt & e.getY() == yt) {
+                                if (e.getX() == xt && e.getY() == yt) {
                                     b.add(e);
                                 }
                             }
@@ -71,18 +71,18 @@ public class Tower3 extends AbstractTower {
     @Override
     // schießen der Tower
     public void shoot(AbstractTower tower) {
-        if(Enemyinrange(tower)){
+        if (Enemyinrange(tower)) {
             ArrayList<Enemy> b = farestEnemys((Tower3) tower);
             for (Enemy e : b) {
                 // unterscheidung bezüglich der freeze-Eigenschaft
-                if(tower.modef == 0){
+                if (tower.modef == 0) {
                     e.takeDamage(tower.damage);
                 }
-                if(tower.modef == 1 && e.getFreeze() == 0){
-                    e.takeDamageandFreeze(tower.damage/5);
+                if (tower.modef == 1 && e.getFreeze() == 0) {
+                    e.takeDamageandFreeze(tower.damage / 5);
                 }
-                if(tower.modef == 1 && e.getFreeze() != 0){
-                    e.takeDamage(tower.damage/2);
+                if (tower.modef == 1 && e.getFreeze() != 0) {
+                    e.takeDamage(tower.damage / 2);
                 }
             }
         }
@@ -96,9 +96,9 @@ public class Tower3 extends AbstractTower {
 
     // tower auf dem Spielfeld platzieren und initialisieren
     static public void place(int x, int y) {
-        if (gamelogic.Shop.money>=u[0][0] && gamelogic.Shop.flowers>=u[0][1]) {
-            gamelogic.Shop.money-=u[0][0];
-            gamelogic.Shop.flowers-=u[0][1];
+        if (gamelogic.Shop.money >= u[0][0] && gamelogic.Shop.flowers >= u[0][1]) {
+            gamelogic.Shop.money -= u[0][0];
+            gamelogic.Shop.flowers -= u[0][1];
             Tower3 k = new Tower3(x, y, null, "3T" + i + "");
             k.updateImage();
             i = i + 1;

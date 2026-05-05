@@ -5,12 +5,10 @@
 package main;
 
 import assets.actors.Enemy;
-import assets.actors.Tower;
 import gamelogic.Ticks;
 import javax.swing.JFrame;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.*;
@@ -29,9 +27,9 @@ public class Main {
     public static void main(String[] args) {
         // Vorbereitung Map Erstlleung
         // TODO code application logic here
-         Ticks m = new Ticks(c);
-         gamelogic.Mouse mouse = new gamelogic.Mouse();
-         c.addMouseListener(mouse);
+        new Ticks(c);
+        gamelogic.Mouse mouse = new gamelogic.Mouse();
+        c.addMouseListener(mouse);
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         f.setLayout(null);
@@ -41,8 +39,6 @@ public class Main {
         JLayeredPane lP = new JLayeredPane();
         lP.setSize(new Dimension(1920, 1080));
         lP.setLayout(null);
-
-    
 
         // 5 -> je kleiner die Zahl, desto weiter im Hintergrund
         lP.add(c, (Object) (5));
@@ -827,6 +823,12 @@ public class Main {
                 for (int i = 0; i < 16; i++) {
                     Enemy.Fast.add(new Enemy(0.15, 0, 40, 5, 0, 490,
                             new ImageIcon(Enemy.class.getResource("/Bilder/Bomben_Gegner.png")), "Fast"));
+                }
+                break;
+            default:
+                if (wave > 10) {
+                    System.out.println("Gewonnen!");
+                    System.exit(0);
                 }
                 break;
         }

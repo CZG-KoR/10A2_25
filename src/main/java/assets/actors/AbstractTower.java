@@ -9,7 +9,7 @@ public abstract class AbstractTower extends GameAsset {
     public static ArrayList<AbstractTower> allTowers = new ArrayList<>();
     protected Enemy enemy = Enemy.Enemy;
     // Standard, Fast, Tank, Weg
-    protected int[][] u = { { 500, 3, 10, 2, 3 }, { 600, 3, 20, 4, 4 }, { 1000, 4, 40, 5, 7 } };
+    protected int[][] u = { { 500, 3, 10, 2, 320 }, { 600, 3, 20, 4, 400 }, { 1000, 4, 40, 5, 760 } };
     protected int upgradeCost, upgradeCostFlowers, damage, fireRate, range, level, modef;
     protected static int i = 0;
     protected static int dist = 5;
@@ -26,7 +26,8 @@ public abstract class AbstractTower extends GameAsset {
         allTowers.add(this);
     }
 
-    public AbstractTower(int upgradeCost, int upgradeCostFlowers, int damage, int fireRate, int range, int level, int modef,
+    public AbstractTower(int upgradeCost, int upgradeCostFlowers, int damage, int fireRate, int range, int level,
+            int modef,
             int x, int y, ImageIcon img, String name) {
         super(x, y, img, name);
         this.upgradeCost = upgradeCost;
@@ -75,7 +76,8 @@ public abstract class AbstractTower extends GameAsset {
 
     // upgraden der tower mit überschreiben der parameter
     public void upgrade(AbstractTower tower) {
-        if (tower.level <= 2 && gamelogic.Shop.money >= tower.upgradeCost && gamelogic.Shop.flowers >= tower.upgradeCostFlowers ) {
+        if (tower.level <= 2 && gamelogic.Shop.money >= tower.upgradeCost
+                && gamelogic.Shop.flowers >= tower.upgradeCostFlowers) {
             gamelogic.Shop.money -= tower.upgradeCost;
             gamelogic.Shop.flowers -= tower.upgradeCostFlowers;
             int x = tower.level;
@@ -89,14 +91,13 @@ public abstract class AbstractTower extends GameAsset {
             main.Main.c.repaint();
         }
     }
+
     // anpassen der zugeordneten bilder je nach Towerlevel
     public void updateImage() {
-        String path = "/Bilder/Koala" + getTowerType() + "LVL" + level + ".png";
+        String path = "/Bilder/Koala" + getTowerType() + "LVL" + (level + 1) + ".png";
         java.net.URL imgURL = getClass().getResource(path);
         if (imgURL != null) {
             this.setImg(new ImageIcon(imgURL));
-        } else {
-            System.err.println("Could not find image: " + path);
         }
     }
 
@@ -107,7 +108,8 @@ public abstract class AbstractTower extends GameAsset {
         if (gamelogic.Shop.mango >= 1) {
             boolean g = false;
             for (AbstractTower t : allTowers) {
-                if (t.modef == 1 && Math.sqrt(Math.pow(t.getX() - tower.getX(), 2) + Math.pow(t.getY() - tower.getY(), 2)) >= dist) {
+                if (t.modef == 1 && Math
+                        .sqrt(Math.pow(t.getX() - tower.getX(), 2) + Math.pow(t.getY() - tower.getY(), 2)) >= dist) {
                     g = true;
                     break;
                 }
@@ -119,8 +121,6 @@ public abstract class AbstractTower extends GameAsset {
         }
     }
 
-
-
     // parameter für gerade der towerschüsse finden
     public double[] shootfunction(AbstractTower tower, Enemy en) {
         double[] f = { 0, 0, 0, 0, 0, 0 };
@@ -128,23 +128,23 @@ public abstract class AbstractTower extends GameAsset {
         int y1 = tower.getY();
         int x2 = en.getX();
         int y2 = en.getY();
-        
+        // berechnung des next tile
         main.Tiles nextTile = main.Main.getNextTile(en.getTile());
         double hitX = x2;
         double hitY = y2;
-        
+
         if (nextTile != null) {
             double dx = x2 - x1;
             double dy = y2 - y1;
-            
+
             double ux = nextTile.getX() - x2;
             double uy = nextTile.getY() - y2;
             double uLen = Math.sqrt(ux * ux + uy * uy);
-            
+            // vektoren normieren
             if (uLen > 0) {
                 ux /= uLen;
                 uy /= uLen;
-                
+
                 double dot = dx * ux + dy * uy;
                 if (dot < 0) {
                     double distSq = dx * dx + dy * dy;
@@ -155,36 +155,46 @@ public abstract class AbstractTower extends GameAsset {
             }
         }
 
-        // division durch 0 verhindern
-        if (x1 == (int)hitX) {
-            f[0] = 0;
+        // Berechnung von m und n für y = mx + n
+        double m, n;
+        if (Math.abs(hitX - x1) < 1e-9) {
+            m = Double.NaN;
+            n = hitX;
         } else {
-            f[0] = (hitY - y1) / (hitX - x1);
+            m = (hitY - y1) / (hitX - x1);
+            n = y1 - m * x1;
         }
-        f[1] = y1 - f[0] * x1;
-        f[2] = x1;
-        f[3] = y1;
+        // belegunge der liste
+        f[0] = m;
+        f[1] = n;
+        f[2] = (double) x1;
+        f[3] = (double) y1;
         f[4] = hitX;
         f[5] = hitY;
         return f;
     }
+
     // grundlage für Schießen der einzellnen Tower
     public abstract void shoot(AbstractTower tower);
 
-    public int getUpgradeCost() { 
-        return upgradeCost; 
+    public int getUpgradeCost() {
+        return upgradeCost;
     }
-    public int getUpgradeCostFlowers() { 
-        return upgradeCostFlowers; 
-    }
-    public int getDamage() { 
-        return damage; 
-    }
-    public int getFireRate() { 
-        return fireRate; 
-    }
-    public int getRange() { 
-        return range; 
-    }
-}
 
+    public int getUpgradeCostFlowers() {
+        return upgradeCostFlowers;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public int getFireRate() {
+        return fireRate;
+    }
+
+    public int getRange() {
+        return range;
+    }
+
+}

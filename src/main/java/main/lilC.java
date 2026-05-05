@@ -7,21 +7,16 @@ package main;
 
 import assets.GameAsset;
 import assets.actors.Enemy;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  *
  * @author guest-kihzdj
  */
 public class lilC extends JPanel {
-  
 
     Image Wiese;
     Image Weg_Waagerecht;
@@ -50,7 +45,7 @@ public class lilC extends JPanel {
     Image AG;
     Image BG;
     Image EG;
-    Image Tafel; 
+    Image Tafel;
     Image Koala1;
     Image Koala1LVL2;
     Image Koala1LVL3;
@@ -62,21 +57,12 @@ public class lilC extends JPanel {
     Image Koala3LVL3;
     Image B2;
     Image B3;
-    
-    
-    
 
     int x = 0;
     int a = 40;
 
     public lilC() {
-  
-          
-          
-          
-          
-          
-          
+
         super();
         this.setLayout(null);
         this.setSize(1920, 1080);
@@ -165,22 +151,19 @@ public class lilC extends JPanel {
         Koala2LVL2 = D.getImage();
         D = new ImageIcon(getClass().getResource("/Bilder/Koala2LVL3.png"));
         Koala2LVL3 = D.getImage();
-         D = new ImageIcon(getClass().getResource("/Bilder/Koala3LVL1.png"));
+        D = new ImageIcon(getClass().getResource("/Bilder/Koala3LVL1.png"));
         Koala3 = D.getImage();
-         D = new ImageIcon(getClass().getResource("/Bilder/Koala3LVL2.png"));
+        D = new ImageIcon(getClass().getResource("/Bilder/Koala3LVL2.png"));
         Koala3LVL2 = D.getImage();
-         D = new ImageIcon(getClass().getResource("/Bilder/Koala3LVL3.png"));
+        D = new ImageIcon(getClass().getResource("/Bilder/Koala3LVL3.png"));
         Koala3LVL3 = D.getImage();
-         D = new ImageIcon(getClass().getResource("/Bilder/Button_2.png"));
+        D = new ImageIcon(getClass().getResource("/Bilder/Button_2.png"));
         B2 = D.getImage();
-         D = new ImageIcon(getClass().getResource("/Bilder/Button_3.png"));
+        D = new ImageIcon(getClass().getResource("/Bilder/Button_3.png"));
         B3 = D.getImage();
         D = new ImageIcon(getClass().getResource("/Bilder/Tafel1.png"));
         Tafel = D.getImage();
-        
-        
-       
-    
+
     }
 
     /**
@@ -188,12 +171,10 @@ public class lilC extends JPanel {
      * @param g
      */
     @Override
-    protected void paintComponent(Graphics g
-    ) {
-     
-     
-        //Wiesen
-        g.drawImage(Wiese, 0 * a, 0 * a, 120, 120, this); 
+    protected void paintComponent(Graphics g) {
+
+        // Wiesen
+        g.drawImage(Wiese, 0 * a, 0 * a, 120, 120, this);
         g.drawImage(Wiese, 3 * a, 0 * a, 120, 120, this);
         g.drawImage(Wiese, 6 * a, 0 * a, 120, 120, this);
         g.drawImage(Wiese, 9 * a, 0 * a, 120, 120, this);
@@ -302,7 +283,7 @@ public class lilC extends JPanel {
         g.drawImage(Wiese, 30 * a, 24 * a, 120, 50, this);
         g.drawImage(Wiese, 33 * a, 24 * a, 80, 50, this);
 
-        //Weg
+        // Weg
         g.drawImage(Weg_Waagerecht, 0, 13 * a, 40, 40, this);
         g.drawImage(Weg_Waagerecht, a, 13 * a, 40, 40, this);
         g.drawImage(Weg_Waagerecht, 2 * a, 13 * a, 40, 40, this);
@@ -391,7 +372,7 @@ public class lilC extends JPanel {
         g.drawImage(Weg_Waagerecht, 33 * a, 13 * a, 40, 40, this);
         g.drawImage(Weg_Waagerecht, 34 * a, 13 * a, 40, 40, this);
 
-        //Dekorationen
+        // Dekorationen
         g.drawImage(Stamm_Flach, 3 * a, 6 * a, 40, 40, this);
         g.drawImage(Baum1, 3 * a, 3 * a, 80, 80, this);
         g.drawImage(Stein_Groß, 2 * a, 2 * a, 40, 40, this);
@@ -585,28 +566,28 @@ public class lilC extends JPanel {
         g.drawImage(Busch_klein, 30 * a, 17 * a, 40, 40, this);
         g.drawImage(Baum3, 31 * a, 17 * a, 80, 80, this);
 
-        //Shop
-       
+        // Shop
+
         g.drawImage(Background, 1400, 0, 520, 1080, this);
         g.drawImage(Sign, 1520, 75, 400, 200, this);
         g.drawImage(oSL, 1400, 0, 600, 50, this);
-        //Gegner malen
+        // Gegner malen
         int counH = 0;
         for (GameAsset e : Enemy.Standard) {
             counH++;
-            g.drawImage(e.getImg().getImage(), e.getX()-counH*5-80, e.getY()-120, null);
+            g.drawImage(e.getImg().getImage(), e.getX() - counH * 5 - 80, e.getY() - 120, null);
         }
         counH = 0;
         for (GameAsset e : Enemy.Fast) {
             counH++;
-            g.drawImage(e.getImg().getImage(), e.getX()-counH*5-80, e.getY()-50, null);
+            g.drawImage(e.getImg().getImage(), e.getX() - counH * 5 - 80, e.getY() - 50, null);
         }
         counH = 0;
         for (GameAsset e : Enemy.Tank) {
             counH++;
-            g.drawImage(e.getImg().getImage(), e.getX()-counH*5-80, e.getY()-80, null);
-        }        
-        
+            g.drawImage(e.getImg().getImage(), e.getX() - counH * 5 - 80, e.getY() - 80, null);
+        }
+
         // Alle platzierten Tower zeichnen
         for (assets.actors.AbstractTower t : assets.actors.AbstractTower.allTowers) {
             if (t.getImg() != null) {
@@ -614,25 +595,20 @@ public class lilC extends JPanel {
                 g.drawImage(t.getImg().getImage(), t.getX(), t.getY(), 40, 40, this);
             }
         }
-        
-        g.drawImage(Koala1, 1360, 235,260, 300, this);
+
+        g.drawImage(Koala1, 1360, 235, 260, 300, this);
         g.drawImage(Koala3, 1700, 235, 260, 300, this);
         g.drawImage(Koala2LVL2, 1530, 235, 260, 300, this);
-        
-        
-        g.drawImage(B1, 1340, 350,300, 295, this);
+
+        g.drawImage(B1, 1340, 350, 300, 295, this);
         g.drawImage(B1, 1510, 350, 300, 295, this);
-        g.drawImage(B1,1680, 350, 300, 295, this);
-       
+        g.drawImage(B1, 1680, 350, 300, 295, this);
+
         g.drawImage(Tafel, 1400, 525, 530, 400, this);
-        
+
         g.drawImage(B2, 1390, 870, 275, 160, this);
         g.drawImage(B3, 1645, 870, 275, 160, this);
-     
-   
-       
-       
-        
+
     }
 
 }
